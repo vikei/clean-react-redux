@@ -1,3 +1,5 @@
+import {hash} from "./utils";
+
 const usersKey = "__example__users__";
 
 interface User {
@@ -91,17 +93,6 @@ function validateUser(id: string) {
 function sanitizeUser(user: User) {
   const {passwordHash, ...rest} = user;
   return rest;
-}
-
-function hash(str: string) {
-  let hash = 5381;
-  let i = str.length;
-
-  while (i) {
-    hash = (hash * 33) ^ str.charCodeAt(--i);
-  }
-
-  return String(hash >>> 0);
 }
 
 export {create, authenticate, reset};
