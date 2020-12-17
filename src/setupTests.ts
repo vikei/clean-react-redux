@@ -6,11 +6,12 @@ import "@testing-library/jest-dom";
 import {testServer} from "./library/server/test-server";
 import * as usersDb from "./library/server/user-db";
 import * as categoriesDb from "./library/server/categories-db";
+import * as productsDb from "./library/server/products-db";
 
 beforeAll(() => testServer.listen());
 afterAll(() => testServer.close());
 afterEach(() => testServer.resetHandlers());
 
 afterEach(async () => {
-  await Promise.all([usersDb.reset(), categoriesDb.reset()]);
+  await Promise.all([usersDb.reset(), categoriesDb.reset(), productsDb.reset()]);
 });

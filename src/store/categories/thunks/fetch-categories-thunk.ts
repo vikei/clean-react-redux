@@ -5,7 +5,7 @@ import {loadingActions, LoadingKeys} from "../../loading/loading-store";
 import {categoriesActions} from "../categories-store";
 
 const fetchCategoriesThunk = createAsyncThunk(
-  "@@categories/fetchCategories",
+  "@@categories/fetchProducts",
   async (_, {dispatch, rejectWithValue}) => {
     dispatch(loadingActions.setLoading(makePending(LoadingKeys.FetchCategories)));
 

@@ -11,6 +11,8 @@ export enum LoadingKeys {
   FetchCategories = "fetchCategories",
   CreateCategory = "createCategory",
   UpdateCategory = "updateCategory",
+
+  FetchProducts = "getProducts",
 }
 
 export type LoadingState = {

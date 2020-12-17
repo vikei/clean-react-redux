@@ -1,9 +1,6 @@
 import {MainState} from "../../main/create-store";
 import {LoadingKeys, LoadingStatus} from "../loading-store";
 
-/**
- * TODO: test
- */
 function selectLoading(name: LoadingKeys) {
   return (state: MainState) => ({
     loading: state.loading[name],
