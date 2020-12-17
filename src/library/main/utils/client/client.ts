@@ -1,4 +1,4 @@
-import {FAKE_API_URL} from "../../../../server/constants";
+import {FAKE_API_URL} from "../../../server/constants";
 
 interface RequestConfig extends Omit<RequestInit, "body"> {
   token?: string;

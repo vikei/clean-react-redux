@@ -1,24 +1,15 @@
-import faker from "faker";
 import lodash from "lodash";
 import {rest} from "msw";
-import {CATEGORIES_API, CategoryData} from "../../../../library/categories/api/fetch-categories";
-import * as categoriesDb from "../../../../server/categories-db";
-import {FAKE_API_URL} from "../../../../server/constants";
-import {testServer} from "../../../../server/test-server";
+import {CATEGORIES_API} from "../../../../library/categories/api/fetch-categories";
+import * as categoriesDb from "../../../../library/server/categories-db";
+import {FAKE_API_URL} from "../../../../library/server/constants";
+import {testServer} from "../../../../library/server/test-server";
+import {buildCategory} from "../../../../library/test/generate";
 import {makePending, makeRejected, makeResolved} from "../../../loading/lib/make-loading";
 import {loadingActions, LoadingKeys} from "../../../loading/loading-store";
 import {createStore} from "../../../main/create-store";
 import {categoriesActions} from "../../categories-store";
 import {fetchCategoriesThunk} from "../../thunks/fetch-categories-thunk";
-
-function buildCategory(overrides: Partial<CategoryData> = {}): CategoryData {
-  return {
-    id: faker.random.uuid(),
-    name: faker.random.words(2),
-    active: faker.random.boolean(),
-    ...overrides,
-  };
-}
 
 async function createThunk() {
   const mockDispatch = jest.fn();

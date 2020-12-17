@@ -1,6 +1,6 @@
 import {MockedRequest, rest} from "msw";
-import {FAKE_API_URL} from "../../../../server/constants";
-import {testServer} from "../../../../server/test-server";
+import {FAKE_API_URL} from "../../../server/constants";
+import {testServer} from "../../../server/test-server";
 import {client} from "../client/client";
 
 test("call with GET when data not provided", async () => {

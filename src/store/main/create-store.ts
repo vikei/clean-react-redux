@@ -1,8 +1,9 @@
 import {configureStore} from "@reduxjs/toolkit";
+import {mainReducer} from "./main-reducer";
 
 function createStore() {
   return configureStore({
-    reducer: () => ({}),
+    reducer: mainReducer,
     middleware: getDefaultMiddleware =>
       getDefaultMiddleware({
         thunk: {
@@ -11,5 +12,7 @@ function createStore() {
       }),
   });
 }
+
+export type MainState = ReturnType<ReturnType<typeof createStore>["getState"]>;
 
 export {createStore};
