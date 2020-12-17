@@ -20,17 +20,20 @@ function buildCategory(overrides: Partial<CategoryData> = {}): CategoryData {
   };
 }
 
-test("fetch categories", async () => {
-  const categories = await Promise.all(lodash.times(5, () => categoriesDb.create(buildCategory())));
-
+async function createThunk() {
   const mockDispatch = jest.fn();
-
   const thunk = fetchCategoriesThunk();
   const result = await thunk(mockDispatch, createStore().getState, {});
 
-  expect(result.type).toEqual(fetchCategoriesThunk.fulfilled.toString());
+  return {dispatch: mockDispatch, result, thunk};
+}
 
-  expect(mockDispatch.mock.calls).toEqual([
+test("fetch categories", async () => {
+  const categories = await Promise.all(lodash.times(5, () => categoriesDb.create(buildCategory())));
+
+  const {dispatch} = await createThunk();
+
+  expect(dispatch.mock.calls).toEqual([
     [
       expect.objectContaining({
         type: fetchCategoriesThunk.pending.toString(),
@@ -49,21 +52,15 @@ test("fetch categories", async () => {
 
 test("emit error", async () => {
   const testError = {status: 400, message: "__test_error_message__"};
-
   testServer.use(
     rest.get(`${FAKE_API_URL}${CATEGORIES_API}`, (req, res, ctx) => {
       return res(ctx.status(testError.status), ctx.json(testError));
     }),
   );
 
-  const mockDispatch = jest.fn();
+  const {dispatch} = await createThunk();
 
-  const thunk = fetchCategoriesThunk();
-  const result = await thunk(mockDispatch, createStore().getState, {});
-
-  expect(result.type).toEqual(fetchCategoriesThunk.rejected.toString());
-
-  expect(mockDispatch.mock.calls).toEqual([
+  expect(dispatch.mock.calls).toEqual([
     [
       expect.objectContaining({
         type: fetchCategoriesThunk.pending.toString(),
