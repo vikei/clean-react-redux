@@ -11,11 +11,6 @@ import {createStore} from "../../../main/create-store";
 import {categoriesActions} from "../../categories-store";
 import {fetchCategoriesThunk} from "../../thunks/fetch-categories-thunk";
 
-/**
- * TODO
- * 2) Create constants for requestStatus
- */
-
 function buildCategory(overrides: Partial<CategoryData> = {}): CategoryData {
   return {
     id: faker.random.uuid(),
@@ -80,7 +75,7 @@ test("emit error", async () => {
       expect.objectContaining({
         payload: {
           data: testError,
-          response: expect.objectContaining({ok: false, status: testError.status}),
+          response: expect.objectContaining({status: testError.status}),
         },
         type: fetchCategoriesThunk.rejected.toString(),
       }),

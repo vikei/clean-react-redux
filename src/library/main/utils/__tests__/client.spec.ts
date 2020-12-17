@@ -87,6 +87,6 @@ test("reject with response and data", async () => {
   const result = await client(endpoint).catch(e => e);
   expect(result).toEqual({
     data: testError,
-    response: expect.objectContaining({status: testError.status, ok: false}),
+    response: expect.objectContaining({status: testError.status}),
   });
 });
