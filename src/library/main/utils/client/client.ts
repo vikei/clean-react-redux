@@ -25,7 +25,7 @@ async function client<T extends unknown>(
     if (response.ok) {
       return data;
     } else {
-      return Promise.reject(data);
+      return Promise.reject({response, data});
     }
   });
 }

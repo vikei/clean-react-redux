@@ -43,7 +43,7 @@ function validateCategoryForm({name, active}: CategoryForm) {
     throw Error("A name is required");
   }
 
-  if (!active) {
+  if (active === undefined || active === null) {
     throw Error("A active is required");
   }
 
@@ -51,9 +51,9 @@ function validateCategoryForm({name, active}: CategoryForm) {
 }
 
 async function create(form: CategoryForm) {
-  const {name, active} = validateCategoryForm(form);
-  const id = hash(name);
-  categories[id] = {id, name, active};
+  const data = validateCategoryForm(form);
+  const id = hash(data.name);
+  categories[id] = {id, ...data};
   persist();
   return read(id);
 }
@@ -61,6 +61,10 @@ async function create(form: CategoryForm) {
 async function read(id: string) {
   validateCategory(id);
   return categories[id];
+}
+
+async function find() {
+  return Object.values(categories);
 }
 
 async function reset() {
@@ -75,4 +79,4 @@ function validateCategory(id: string) {
   }
 }
 
-export {create, reset};
+export {create, reset, find};

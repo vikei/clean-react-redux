@@ -74,3 +74,19 @@ test("add custom configuration", async () => {
   // @ts-ignore
   expect(request.headers.get("Content-Type")).toEqual(customConfig.headers["Content-Type"]);
 });
+
+test("reject with response and data", async () => {
+  const endpoint = "test-endpoint";
+  const testError = {status: 400, message: "__test_error_message__"};
+  testServer.use(
+    rest.get(`${FAKE_API_URL}${endpoint}`, (req, res, ctx) => {
+      return res(ctx.status(testError.status), ctx.json(testError));
+    }),
+  );
+
+  const result = await client(endpoint).catch(e => e);
+  expect(result).toEqual({
+    data: testError,
+    response: expect.objectContaining({status: testError.status, ok: false}),
+  });
+});
