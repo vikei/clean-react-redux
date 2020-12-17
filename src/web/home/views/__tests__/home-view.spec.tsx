@@ -4,13 +4,13 @@ import * as categoriesDb from "../../../../library/server/categories-db";
 import * as productsDb from "../../../../library/server/products-db";
 import {buildCategory, buildProduct} from "../../../../library/test/generate";
 import {renderTest, screen, waitForLoadingToFinish, within} from "../../../../library/test/utils";
-import HomeView from "../home-view";
+import AppView from "../../../main/views/app-view";
 
 test("renders all data for home screen", async () => {
   const categories = await Promise.all(lodash.times(5, () => categoriesDb.create(buildCategory())));
   const products = await Promise.all(lodash.times(5, () => productsDb.create(buildProduct())));
 
-  renderTest(<HomeView />);
+  renderTest(<AppView />);
 
   await waitForLoadingToFinish();
 
