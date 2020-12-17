@@ -1,3 +1,5 @@
+import lodash from "lodash";
+import {buildCategory} from "../test/generate";
 import {hash} from "./utils";
 
 const categoriesKey = "__example__categories__";
@@ -29,6 +31,16 @@ window.__private__ = window.__private__ || {};
 window.__private__.purgeCategories = () => {
   Object.keys(categories).forEach(key => {
     delete categories[key];
+  });
+  persist();
+};
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+window.__private__.fakeCategories = () => {
+  lodash.times(5, () => {
+    const category = buildCategory();
+    categories[category.id] = category;
   });
   persist();
 };

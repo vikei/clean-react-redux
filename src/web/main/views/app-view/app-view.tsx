@@ -1,21 +1,10 @@
 import React from "react";
+import HomeView from "../../../home/views/home-view";
 
 function AppView() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/AppView.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <HomeView />
     </div>
   );
 }

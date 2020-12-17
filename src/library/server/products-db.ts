@@ -1,3 +1,7 @@
+import lodash from "lodash";
+import * as faker from "faker";
+import {buildProduct} from "../test/generate";
+import * as categoriesDb from "./categories-db";
 import {hash} from "./utils";
 
 const productsKey = "__example_products__";
@@ -32,6 +36,17 @@ window.__private__ = window.__private__ || {};
 window.__private__.purgeUsers = () => {
   Object.keys(products).forEach(key => {
     delete products[key];
+  });
+  persist();
+};
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+window.__private__.fakeProducts = async () => {
+  const categories = await categoriesDb.find();
+  lodash.times(5, () => {
+    const categoryId = categories[faker.random.number(categories.length - 1)].id;
+    const product = buildProduct({categoryId});
+    products[product.id] = product;
   });
   persist();
 };
