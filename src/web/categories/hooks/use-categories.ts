@@ -13,7 +13,7 @@ function useCategories() {
 
   const fetch = useCallback(() => dispatch(fetchCategoriesThunk()), [dispatch]);
 
-  return {categories, ...loading, fetch};
+  return {data: categories, ...loading, fetch};
 }
 
 export {useCategories};

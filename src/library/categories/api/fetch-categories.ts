@@ -1,17 +1,9 @@
 import {client} from "../../main/utils/client/client";
-
-export interface CategoryData {
-  id: string;
-  name: string;
-  active: boolean;
-}
-
-export type CategoriesResponse = {data: CategoryData[]};
-
-const CATEGORIES_API = "categories";
+import {CategoriesResponse} from "./categories-response";
+import {CATEGORIES_API} from "./constants";
 
 async function fetchCategories() {
   return client<CategoriesResponse>(CATEGORIES_API);
 }
 
-export {CATEGORIES_API, fetchCategories};
+export {fetchCategories};

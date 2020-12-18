@@ -1,12 +1,16 @@
+/** @jsxImportSource @emotion/react */
+import {css} from "@emotion/react/macro";
 import React, {useEffect} from "react";
 import {useCategories} from "../../../categories/hooks/use-categories";
 import {useProducts} from "../../../products/hooks/use-products";
+import CategoriesNavigation from "./categories-navigation";
 
 function HomeView() {
-  const {fetch: fetchCategories, ...categories} = useCategories();
-  const {fetch: fetchProducts, ...products} = useProducts();
+  const {fetch: fetchCategories, ...categoriesState} = useCategories();
+  const {fetch: fetchProducts, ...productsState} = useProducts();
 
-  const loading = categories.isPending || products.isPending;
+  const loading = categoriesState.isPending || productsState.isPending;
+  const resolved = categoriesState.isResolved && categoriesState.isResolved;
 
   useEffect(() => {
     fetchCategories();
@@ -16,17 +20,17 @@ function HomeView() {
   return (
     <div>
       {loading && <div aria-label="loading" />}
-      {categories.isResolved && products.isResolved && (
+      {resolved && (
         <div>
-          <div aria-label="categories-list">
-            {categories.categories.map(i => (
-              <div key={i.id}>
-                <span>{i.name}</span>
-              </div>
-            ))}
+          <div
+            css={css({
+              padding: "25px 0",
+            })}
+          >
+            <CategoriesNavigation list={categoriesState.data} />
           </div>
           <div aria-label="products-list">
-            {products.products.map(i => (
+            {productsState.data.map(i => (
               <div key={i.id} aria-label={i.name}>
                 <span>{i.name}</span>
                 <span>{i.description}</span>

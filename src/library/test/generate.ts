@@ -1,6 +1,6 @@
 import faker from "faker";
-import {CategoryData} from "../categories/api/fetch-categories";
-import {ProductData} from "../products/api/fetch-products";
+import {CategoryData} from "../categories/api/categories-response";
+import {ProductData} from "../products/api/products-response";
 
 function buildCategory(overrides: Partial<CategoryData> = {}): CategoryData {
   return {

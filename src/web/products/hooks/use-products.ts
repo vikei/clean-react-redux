@@ -13,7 +13,7 @@ function useProducts() {
 
   const fetch = useCallback(() => dispatch(fetchProductsThunk()), [dispatch]);
 
-  return {products, ...loading, fetch};
+  return {data: products, ...loading, fetch};
 }
 
 export {useProducts};

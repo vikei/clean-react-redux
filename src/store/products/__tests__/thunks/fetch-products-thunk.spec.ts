@@ -1,6 +1,6 @@
 import lodash from "lodash";
 import {rest} from "msw";
-import {PRODUCTS_API} from "../../../../library/products/api/fetch-products";
+import {PRODUCTS_API} from "../../../../library/products/api/constants";
 import {FAKE_API_URL} from "../../../../library/server/constants";
 import * as productsDb from "../../../../library/server/products-db";
 import {testServer} from "../../../../library/server/test-server";
@@ -8,7 +8,7 @@ import {buildProduct} from "../../../../library/test/generate";
 import {makePending, makeRejected, makeResolved} from "../../../loading/lib/make-loading";
 import {loadingActions, LoadingKeys} from "../../../loading/loading-store";
 import {createStore} from "../../../main/create-store";
-import {productsActions} from "../../../products/products-store";
+import {productsActions} from "../../products-store";
 import {fetchProductsThunk} from "../../thunks/fetch-products-thunk";
 
 async function createThunk() {

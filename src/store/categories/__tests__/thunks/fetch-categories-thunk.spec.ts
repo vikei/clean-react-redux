@@ -1,6 +1,6 @@
 import lodash from "lodash";
 import {rest} from "msw";
-import {CATEGORIES_API} from "../../../../library/categories/api/fetch-categories";
+import {CATEGORIES_API} from "../../../../library/categories/api/constants";
 import * as categoriesDb from "../../../../library/server/categories-db";
 import {FAKE_API_URL} from "../../../../library/server/constants";
 import {testServer} from "../../../../library/server/test-server";

@@ -8,6 +8,7 @@ test("return select state", () => {
     ...store.getState(),
     loading: {[LoadingKeys.FetchCategories]: LoadingStatus.Resolved},
   };
+
   const result = selectLoading(LoadingKeys.FetchCategories)(state);
 
   expect(result).toEqual({

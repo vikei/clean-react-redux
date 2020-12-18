@@ -14,7 +14,7 @@ test("renders all data for home screen", async () => {
 
   await waitForLoadingToFinish();
 
-  const categoriesList = within(screen.getByLabelText("categories-list"));
+  const categoriesList = within(screen.getByLabelText("categories-navigation"));
   categories.forEach(({name}) => {
     expect(categoriesList.getByText(name)).toBeInTheDocument();
   });

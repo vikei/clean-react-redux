@@ -20,7 +20,7 @@ export type LoadingState = {
 };
 
 interface LoadingData {
-  key: LoadingKeys;
+  key: LoadingKeys | string;
   status: LoadingStatus;
 }
 
