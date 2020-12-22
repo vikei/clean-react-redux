@@ -1,16 +1,11 @@
 import lodash from "lodash";
+import {CategoryData} from "../categories/api/categories-response";
 import {buildCategory} from "../test/generate";
 import {hash} from "./utils";
 
 const categoriesKey = "__example__categories__";
 
-interface Categories {
-  id: string;
-  name: string;
-  active: boolean;
-}
-
-type CategoriesDb = {[id: string]: Categories};
+type CategoriesDb = {[id: string]: CategoryData};
 
 let categories: CategoriesDb = {};
 const persist = () => window.localStorage.setItem(categoriesKey, JSON.stringify(categories));

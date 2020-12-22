@@ -20,9 +20,9 @@ test("renders all data for home screen", async () => {
   });
 
   const productsList = within(screen.getByLabelText("products-list"));
-  products.forEach(({name, description, price}) => {
+  products.forEach(({name, shortDescription, price}) => {
     expect(productsList.getByText(name)).toBeInTheDocument();
-    expect(productsList.getByText(description)).toBeInTheDocument();
+    expect(productsList.getByText(shortDescription)).toBeInTheDocument();
     expect(productsList.getByText(price.toString())).toBeInTheDocument();
   });
 });

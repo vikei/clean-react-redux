@@ -2,8 +2,10 @@
 import {css} from "@emotion/react/macro";
 import React, {useEffect} from "react";
 import {useCategories} from "../../../categories/hooks/use-categories";
+import AppContent from "../../../library/components/app-content";
 import {useProducts} from "../../../products/hooks/use-products";
 import CategoriesNavigation from "./categories-navigation";
+import {ProductsList} from "./products-list";
 
 function HomeView() {
   const {fetch: fetchCategories, ...categoriesState} = useCategories();
@@ -18,10 +20,10 @@ function HomeView() {
   }, [fetchCategories, fetchProducts]);
 
   return (
-    <div>
+    <AppContent>
       {loading && <div aria-label="loading" />}
       {resolved && (
-        <div>
+        <>
           <div
             css={css({
               padding: "25px 0",
@@ -29,18 +31,10 @@ function HomeView() {
           >
             <CategoriesNavigation list={categoriesState.data} />
           </div>
-          <div aria-label="products-list">
-            {productsState.data.map(i => (
-              <div key={i.id} aria-label={i.name}>
-                <span>{i.name}</span>
-                <span>{i.description}</span>
-                <span>{i.price}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+          <ProductsList list={productsState.data} />
+        </>
       )}
-    </div>
+    </AppContent>
   );
 }
 

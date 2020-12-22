@@ -1,21 +1,13 @@
 import lodash from "lodash";
 import * as faker from "faker";
+import {ProductData} from "../products/api/products-response";
 import {buildProduct} from "../test/generate";
 import * as categoriesDb from "./categories-db";
 import {hash} from "./utils";
 
 const productsKey = "__example_products__";
 
-interface Product {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  active: boolean;
-  categoryId: string;
-}
-
-type ProductsDb = {[id: string]: Product};
+type ProductsDb = {[id: string]: ProductData};
 
 let products: ProductsDb = {};
 const persist = () => window.localStorage.setItem(productsKey, JSON.stringify(products));
@@ -51,21 +43,37 @@ window.__private__.fakeProducts = async () => {
   persist();
 };
 
-export interface ProductForm {
+export interface ProductForm extends Partial<ProductData> {
   name?: string;
   description?: string;
+  shortDescription?: string;
   price?: number;
   active?: boolean;
   categoryId: string;
 }
 
-function validateProductForm({name, description, active, price, categoryId}: ProductForm) {
+function validateProductForm({
+  name,
+  description,
+  active,
+  price,
+  categoryId,
+  shortDescription,
+}: ProductForm) {
   if (!name) {
     throw Error("A name is required");
   }
 
   if (!description) {
     throw Error("A description is required");
+  }
+
+  if (!description) {
+    throw Error("A description is required");
+  }
+
+  if (!shortDescription) {
+    throw Error("A short description is required");
   }
 
   if (price === undefined || price === null) {
@@ -80,7 +88,7 @@ function validateProductForm({name, description, active, price, categoryId}: Pro
     throw Error("A category is required");
   }
 
-  return {name, description, active, price, categoryId};
+  return {name, description, active, price, shortDescription, categoryId};
 }
 
 async function create(form: ProductForm) {

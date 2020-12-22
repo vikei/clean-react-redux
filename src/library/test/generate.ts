@@ -15,7 +15,8 @@ function buildProduct(overrides: Partial<ProductData> = {}): ProductData {
   return {
     id: faker.random.uuid(),
     name: faker.random.words(2),
-    description: faker.lorem.sentence(2),
+    description: faker.lorem.sentence(1),
+    shortDescription: faker.lorem.paragraph(2),
     price: parseFloat(faker.commerce.price()),
     active: faker.random.boolean(),
     categoryId: faker.random.uuid(),

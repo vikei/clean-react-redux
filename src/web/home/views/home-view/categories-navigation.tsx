@@ -1,11 +1,11 @@
+import styled from "@emotion/styled/macro";
 import React from "react";
-import styled from "@emotion/styled";
 import {Link} from "react-router-dom";
 import {CategoryEntity} from "../../../../store/categories/categories-store";
 
 const CategoriesList = styled.article({
   display: "flex",
-  justifyContent: "center",
+  justifyContent: "space-between",
 
   "> a": {
     marginRight: 10,

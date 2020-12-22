@@ -1,8 +1,9 @@
 import {createEntityAdapter, createSlice} from "@reduxjs/toolkit";
 
-interface ProductEntity {
+export interface ProductEntity {
   id: string;
   name: string;
+  shortDescription: string;
   description: string;
   active: boolean;
   price: number;
